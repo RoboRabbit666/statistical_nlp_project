@@ -2,6 +2,8 @@
 
 A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**, **multi-modal keyword extraction**, and **advanced sentence ranking** for fact-checking and claim verification.
 
+![NLP Portfolio Banner](images/Gemini_Generated_Image.png)
+
 ## 🌟 Features
 
 ### 🔍 **Advanced RAG System**
