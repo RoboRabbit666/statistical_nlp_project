@@ -31,10 +31,17 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 - Configuration management
 - Type hints and documentation
 
-## 📋 Documentation & Research
 
-### 📊 Technical Report
-**[Complete Technical Report](docs/project_report/technical_report.pdf)** - Comprehensive research methodology, experimental design, and detailed analysis of all implemented systems.
+## 📈 Research Contributions
+
+This project demonstrates advanced research capabilities including:
+
+1. **Novel Ensemble Methods**: Multi-modal approach combining NER and LLM techniques
+2. **Comprehensive Evaluation**: Statistical significance testing and cross-validation
+3. **Production Architecture**: Scalable system design with professional documentation
+4. **Academic Rigor**: Peer-reviewed methodology with reproducible results
+
+> 💡 **For Detailed Analysis**: See the [complete technical report](docs/project_report/technical_report.pdf) for in-depth methodology, experimental results, and comprehensive evaluation.
 
 
 ## 🚀 Quick Start
