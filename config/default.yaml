@@ -1,0 +1,46 @@
+# Default configuration for Advanced NLP Project
+
+# Model configurations
+sentence_model: "sentence-transformers/all-MiniLM-L6-v2"
+anthropic_model: "claude-3-haiku-20240307"
+max_tokens: 4096
+temperature: 0.0
+
+# Data processing configurations
+batch_size: 128
+max_sequence_length: 512
+num_retrieved_sentences: 5
+
+# API configurations (set via environment variables)
+anthropic_api_key: null  # Set via ANTHROPIC_API_KEY environment variable
+
+# Device configuration
+device: "auto"  # auto, cpu, cuda
+
+# Logging configuration
+log_level: "INFO"
+log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Keyword extraction settings
+keyword_extraction:
+  use_ner: true
+  use_llm: true
+  spacy_model: "en_core_web_sm"
+  max_keywords: 10
+
+# RAG system settings
+rag:
+  max_wikipedia_pages: 3
+  max_sentences_per_page: 20
+  similarity_threshold: 0.7
+
+# Evaluation settings
+evaluation:
+  test_batch_size: 50
+  metrics: ["accuracy", "precision", "recall", "f1"]
+
+# Cache settings
+cache:
+  enable_caching: true
+  cache_dir: "cache/"
+  max_cache_size: "1GB"
