@@ -1,6 +1,6 @@
 # Advanced Natural Language Processing Project
 
-A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**, **multi-modal keyword extraction**, and **advanced sentence ranking** for fact-checking and claim verification.
+A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**, **keyword extraction**, and **advanced sentence ranking** for fact-checking and claim verification.
 
 ![NLP Portfolio Banner](images/Gemini_Generated_Image.png)
 
@@ -12,7 +12,7 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 - Claude-powered reasoning and verdict generation
 - Comprehensive fact-checking pipeline
 
-### 🎯 **Multi-Modal Keyword Extraction**
+### 🎯 **Multi-component Keyword Extraction**
 - **Named Entity Recognition (NER)** using spaCy
 - **Large Language Model (LLM)** extraction via Claude
 - **Ensemble approach** combining both methods (87.7% accuracy)
@@ -36,7 +36,7 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 
 This project demonstrates advanced research capabilities including:
 
-1. **Novel Ensemble Methods**: Multi-modal approach combining NER and LLM techniques
+1. **Novel Ensemble Methods**: Multi-method approach combining NER and LLM techniques
 2. **Comprehensive Evaluation**: Statistical significance testing and cross-validation
 3. **Production Architecture**: Scalable system design with professional documentation
 4. **Academic Rigor**: Peer-reviewed methodology with reproducible results
@@ -120,7 +120,7 @@ metrics = rag.evaluate_performance(test_data)
 
 ### 2. Keyword Extraction (`nlp_project.keyword_extraction`)
 
-Multi-modal keyword extraction with ensemble methods:
+Keyword extraction with ensemble methods:
 
 ```python
 from nlp_project.keyword_extraction import KeywordExtractor
