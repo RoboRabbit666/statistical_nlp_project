@@ -35,8 +35,8 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/advanced-nlp-project.git
-cd advanced-nlp-project
+git clone https://github.com/RoboRabbit666/statistical-nlp-project.git
+cd statistical-nlp-project
 
 # Install in development mode
 pip install -e .
@@ -279,11 +279,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Powered by Anthropic's Claude API
 - Utilizes Wikipedia's knowledge base
 
-## 📞 Contact
+## 🔗 Link
 
-Your Name - your.email@example.com
 
-Project Link: [https://github.com/yourusername/advanced-nlp-project](https://github.com/yourusername/advanced-nlp-project)
+Project Link: [https://github.com/RoboRabbit666/statistical-nlp-project](https://github.com/RoboRabbit666/statistical-nlp-project)
 
 ---
 
