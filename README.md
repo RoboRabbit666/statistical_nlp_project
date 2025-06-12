@@ -31,6 +31,12 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 - Configuration management
 - Type hints and documentation
 
+## 📋 Documentation & Research
+
+### 📊 Technical Report
+**[Complete Technical Report](docs/project_report/technical_report.pdf)** - Comprehensive research methodology, experimental design, and detailed analysis of all implemented systems.
+
+
 ## 🚀 Quick Start
 
 ### Installation
