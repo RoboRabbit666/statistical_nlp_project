@@ -213,15 +213,16 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 ```
 
 ### **📈 Results & Performance**
-
+**(TLDR)**
 | Component | Method | Accuracy | Improvement |
 |-----------|--------|----------|-------------|
-| **Keyword Extraction** | NER Only | ~75% | Baseline |
-| **Keyword Extraction** | LLM Only | ~80% | +5% |
-| **Keyword Extraction** | **Ensemble** | **87.7%** | **+12.7%** |
+| **Keyword Extraction** | LLM Only | 71.2% | Baseline |
+| **Keyword Extraction** | NER Only | 77.6% | **+6.4%** |
+| **Keyword Extraction** | **Ensemble** | **87.7%** | **+16.5%%** |
 | **Claim Verification** | LLM Only | 58% | Baseline |
 | **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
 
+**(Details)**
 ### **Keyword Extraction Performance**
 *Evaluated on 1000 FEVER test samples*
 
