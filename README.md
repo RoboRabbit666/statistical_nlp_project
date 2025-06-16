@@ -67,7 +67,7 @@ Our approach integrates three core methodological components:
 - **Similarity Metrics**: Cosine similarity between claim and sentence embeddings
 - **Output**: Top 5 most relevant sentences per Wikipedia page
 
-## 📊 Experimental Design & Pipeline 
+## 📊 Experimental Design
 
 ### **Dataset & Evaluation Framework**
 - **Primary Dataset**: FEVER (Fact Extraction and VERification) dataset
@@ -83,14 +83,15 @@ Our approach integrates three core methodological components:
 - **Retrieved Sentences**: 5 per Wikipedia page
 - **Evaluation Method**: Two-step prompting with Chain-of-Thought reasoning
 
+## 🪈 Project Pipeline 
 ### **Performance Benchmarks**
 - **Keyword Extraction**: Comparative analysis across NER, LLM, and combined methods
 - **RAG System**: End-to-end claim verification pipeline
 - **Processing Optimization**: GPU acceleration support for sentence transformers
 
-### **📊 Complete Workflow Overview**
+### **⏳ Complete Workflow Overview** ⏳
 
-Our experimental pipeline follows a systematic approach to evaluate and compare different NLP techniques for claim verification and keyword extraction:
+This experimental pipeline follows a systematic approach to evaluate and compare different NLP techniques for claim verification and keyword extraction:
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
