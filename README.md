@@ -54,7 +54,7 @@ Our approach integrates three core methodological components:
 - **Generation Model**: Claude-3-Haiku for reasoning and verdict generation
 - **Pipeline Integration**: End-to-end automated fact-checking workflow
 
-### **2. Multi-Modal Keyword Extraction**
+### **2. Multi-Method Keyword Extraction**
 - **Named Entity Recognition**: spaCy-based entity extraction for structured information
 - **Large Language Model Extraction**: Claude-powered semantic keyword identification
 - **Ensemble Approach**: Weighted combination of both methods for optimal performance
