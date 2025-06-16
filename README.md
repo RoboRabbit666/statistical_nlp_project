@@ -223,7 +223,6 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 | **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
 
 <br>
-<br>
 
 ### **Details:**
 **Keyword Extraction Performance**
