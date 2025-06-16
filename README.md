@@ -68,7 +68,7 @@ Our approach integrates three core methodological components based on the FEVER 
 ## 📊 Experimental Results
 
 ### **Performance Benchmarks**
-Based on FEVER dataset evaluation (282 test samples):
+Based on research findings from the technical report:
 
 | Component | Method | Accuracy | Improvement |
 |-----------|--------|----------|-------------|
@@ -78,72 +78,99 @@ Based on FEVER dataset evaluation (282 test samples):
 | **Claim Verification** | LLM Only | 58% | Baseline |
 | **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
 
-### **Detailed Results**
+### **Research Results Summary**
 
 **Keyword Extraction Performance**
-*(Evaluated on 1000 FEVER test samples)*
+- **Evaluation Method**: Comparison against FEVER dataset ground truth Wikipedia pages
+- **Test Samples**: 1000 samples from FEVER test dataset for keyword extraction evaluation
+- **NER Method**: 77.6% accuracy using spaCy named entity recognition
+- **LLM Method**: 71.2% accuracy using Claude-3-Haiku keyword extraction
+- **Combined Ensemble**: 87.7% accuracy aggregating both NER and LLM results
 
-| Method | Accuracy | Details |
-|--------|----------|---------|
-| NER Only | 77.6% | spaCy named entity recognition |
-| LLM Only | 71.2% | Claude-3-Haiku keyword extraction |
-| **Combined Approach** | **87.7%** | **Aggregated NER + LLM results** |
+**RAG vs LLM-Only Comparison**
+- **Test Dataset**: 282 samples from FEVER test split
+- **Limitation**: Sample size constrained by Claude-3-Haiku rate limits (50,000 tokens/min)
+- **LLM-Only Accuracy**: 58% (baseline approach)
+- **RAG-Enhanced Accuracy**: 63% (5% improvement over baseline)
+- **Classification Categories**: SUPPORTS/REFUTES/NOT ENOUGH INFO
+- **Key Finding**: RAG approach reduced hallucinations and overconfident "REFUTES" classifications
 
-**RAG System Performance**
-- **Dataset**: FEVER (Fact Extraction and VERification) - 282 test samples
-- **LLM-Only Accuracy**: 58%
-- **RAG-Enhanced LLM Accuracy**: 63%
-- **Performance Improvement**: 5% increase with RAG implementation
-- **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO
+**Research Limitations**
+- Constrained to Claude-3-Haiku (smallest tier) due to cost and time limitations
+- FEVER dataset from 2018 may have outdated Wikipedia ground truth
+- Rate limiting affected sample size for comprehensive evaluation
 
 ## 🪈 System Architecture & Pipeline
 
 ### **Complete Workflow Overview**
 
-The system follows a **4-step pipeline** for claim verification:
+The system follows a **5-step pipeline** for claim verification (based on `rag_system.py` implementation):
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Input Claim   │ -> │ Keyword Extract │ -> │ Wikipedia Search│ -> │ Sentence Ranking│
-│                 │    │  (NER + LLM)    │    │   & Retrieval   │    │ & Similarity    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
-                                 │                       │                       │
-                                 v                       v                       v
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ Final Verdict   │ <- │ Claude Analysis │ <- │ Context Assembly│ <- │ Evidence Filter │
-│ & Confidence    │    │  & Reasoning    │    │ & Integration   │    │ (Top-k Sentences)│
-└─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Input Claim   │ -> │ Step 1: Keyword │ -> │ Step 2: Content │
+│                 │    │ Extraction      │    │ Retrieval       │
+│                 │    │ (NER + LLM)     │    │ (Wikipedia API) │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                 │                       │
+                                 v                       v
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Step 5: Final   │ <- │ Step 4: Claude  │ <- │ Step 3: Sentence│
+│ Confidence &    │    │ Reasoning &     │    │ Ranking &       │
+│ Result Assembly │    │ Verdict Gen.    │    │ Evidence Filter │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
 ### **Implementation Details**
 
-#### **Step 1: Keyword Extraction**
+#### **Step 1: Keyword Extraction** (`rag_system.py:84-87`)
 ```python
-# Multi-method keyword extraction (KeywordExtractor)
-keywords = extractor.extract_keywords(claim, method="combined")
-# Combines NER (spaCy) + LLM (Claude) approaches
+# Multi-method keyword extraction using combined approach
+keywords = self.keyword_extractor.extract_keywords(
+    claim, method="combined"  # Combines NER (spaCy) + LLM (Claude)
+)
 ```
 
-#### **Step 2: Wikipedia Knowledge Retrieval**
+#### **Step 2: Wikipedia Content Retrieval** (`rag_system.py:92-101`)
 ```python
-# Content retrieval for each keyword (WikipediaRetriever)
+# Retrieve Wikipedia content for each extracted keyword
+all_content = []
 for keyword in keywords:
-    content = retriever.search_and_get_content(keyword)
-    all_content.extend(content)
+    try:
+        content = self.retriever.search_and_get_content(keyword)
+        if content:
+            all_content.extend(content)
+    except Exception as e:
+        logger.warning(f"Failed to retrieve content for '{keyword}': {e}")
 ```
 
-#### **Step 3: Sentence Ranking & Evidence Selection**
+#### **Step 3: Sentence Extraction & Ranking** (`rag_system.py:113-127`)
 ```python
-# Sentence-level ranking using pre-trained transformers (SentenceRanker)
-ranked_sentences = ranker.rank_sentences_by_relevance(claim, sentences)
-retrieved_sentences = ranked_sentences[:num_sentences]
+# Extract sentences from content and rank by relevance
+retrieved_sentences = []
+for content in all_content:
+    sentences = self.retriever.extract_sentences_from_content(content, num_sentences)
+    ranked_sentences = self.sentence_ranker.rank_sentences_by_relevance(
+        claim, sentences
+    )[0]  # Get ranked sentences only
+    retrieved_sentences.extend(ranked_sentences[:num_sentences])
 ```
 
-#### **Step 4: RAG-Enhanced Claim Verification**
+#### **Step 4: Claude Reasoning & Verdict Generation** (`rag_system.py:139-141`)
 ```python
-# Two-step reasoning with Claude (ClaudeGenerator)
-reasoning = generator.generate_reasoning(claim, evidence_sentences)
-verdict = generator.generate_verdict(claim, evidence_sentences, reasoning)
+# Two-step Claude generation process
+reasoning = self.generator.generate_reasoning(claim, indexed_sentences)
+verdict = self.generator.generate_verdict(claim, indexed_sentences, reasoning)
+```
+
+#### **Step 5: Confidence Calculation & Result Assembly** (`rag_system.py:143-154`)
+```python
+# Calculate confidence score and assemble final result
+confidence = self._calculate_confidence(claim, keywords, retrieved_sentences, verdict)
+result = {
+    "claim": claim, "verdict": verdict, "confidence": confidence,
+    "keywords": keywords, "reasoning": reasoning
+}
 ```
 
 ### **Core Components**
