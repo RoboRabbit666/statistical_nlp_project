@@ -222,6 +222,7 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 | **Claim Verification** | LLM Only | 58% | Baseline |
 | **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
 
+
 **Details:**
 ### **Keyword Extraction Performance**
 *Evaluated on 1000 FEVER test samples*
