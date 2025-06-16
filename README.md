@@ -212,7 +212,7 @@ python -m nlp_project.keyword_extraction --text "Your claim here"
 python -m nlp_project.rag --claim "Your claim here" --mode verification
 ```
 
-### **📈 Key Experimental Findings**
+### **📈 Results & Performance**
 
 | Component | Method | Accuracy | Improvement |
 |-----------|--------|----------|-------------|
@@ -221,6 +221,28 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 | **Keyword Extraction** | **Ensemble** | **87.7%** | **+12.7%** |
 | **Claim Verification** | LLM Only | 58% | Baseline |
 | **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
+
+### **Keyword Extraction Performance**
+*Evaluated on 1000 FEVER test samples*
+
+| Method | Accuracy | Details |
+|--------|----------|---------|
+| NER Only | 77.6% | spaCy named entity recognition |
+| LLM Only | 71.2% | Claude-3-Haiku keyword extraction |
+| **Combined Approach** | **87.7%** | **Aggregated NER + LLM results** |
+
+### **RAG System Performance**
+- **Dataset**: FEVER (Fact Extraction and VERification) - 282 test samples
+- **LLM-Only Accuracy**: 58%
+- **RAG-Enhanced LLM Accuracy**: 63%
+- **Performance Improvement**: 5% increase with RAG implementation
+- **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO
+
+### **Computational Performance**
+- **GPU Acceleration**: CUDA support for sentence transformers
+- **Batch Processing**: Optimized for large-scale claim verification
+- **Memory Efficiency**: Intelligent caching and resource management
+- **Scalability**: Production-ready architecture for high-throughput scenarios
 
 ### **🎯 Reproducibility Guide**
 
@@ -427,30 +449,6 @@ config = Config(
     device="cuda"
 )
 ```
-
-## 📈 Results & Performance
-
-### **Keyword Extraction Performance**
-*Evaluated on 1000 FEVER test samples*
-
-| Method | Accuracy | Details |
-|--------|----------|---------|
-| NER Only | 77.6% | spaCy named entity recognition |
-| LLM Only | 71.2% | Claude-3-Haiku keyword extraction |
-| **Combined Approach** | **87.7%** | **Aggregated NER + LLM results** |
-
-### **RAG System Performance**
-- **Dataset**: FEVER (Fact Extraction and VERification) - 282 test samples
-- **LLM-Only Accuracy**: 58%
-- **RAG-Enhanced LLM Accuracy**: 63%
-- **Performance Improvement**: 5% increase with RAG implementation
-- **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO
-
-### **Computational Performance**
-- **GPU Acceleration**: CUDA support for sentence transformers
-- **Batch Processing**: Optimized for large-scale claim verification
-- **Memory Efficiency**: Intelligent caching and resource management
-- **Scalability**: Production-ready architecture for high-throughput scenarios
 
 ## 🧪 Testing
 
