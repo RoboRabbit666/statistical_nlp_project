@@ -213,7 +213,7 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 ```
 
 ### **📈 Results & Performance**
-**TLDR:**
+### **TLDR:**
 | Component | Method | Accuracy | Improvement |
 |-----------|--------|----------|-------------|
 | **Keyword Extraction** | LLM Only | 71.2% | Baseline |
@@ -225,9 +225,9 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 <br>
 <br>
 
-**Details:**
-### **Keyword Extraction Performance**
-*Evaluated on 1000 FEVER test samples*
+### **Details:**
+**Keyword Extraction Performance**
+*(Evaluated on 1000 FEVER test samples)*
 
 | Method | Accuracy | Details |
 |--------|----------|---------|
@@ -235,14 +235,14 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 | LLM Only | 71.2% | Claude-3-Haiku keyword extraction |
 | **Combined Approach** | **87.7%** | **Aggregated NER + LLM results** |
 
-### **RAG System Performance**
+**RAG System Performance**
 - **Dataset**: FEVER (Fact Extraction and VERification) - 282 test samples
 - **LLM-Only Accuracy**: 58%
 - **RAG-Enhanced LLM Accuracy**: 63%
 - **Performance Improvement**: 5% increase with RAG implementation
 - **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO
 
-### **Computational Performance**
+**Computational Performance**
 - **GPU Acceleration**: CUDA support for sentence transformers
 - **Batch Processing**: Optimized for large-scale claim verification
 - **Memory Efficiency**: Intelligent caching and resource management
