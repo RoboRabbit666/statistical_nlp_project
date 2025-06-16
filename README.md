@@ -100,7 +100,7 @@ Our approach integrates three core methodological components:
 
 ```bash
 # Clone the repository
-git clone https://github.com/RoboRabbit666/statistical-nlp-project.git
+git clone https://github.com/RoboRabbit666/statistical_nlp_project.git
 cd statistical-nlp-project
 
 # Install in development mode
@@ -190,7 +190,7 @@ print(f"Models: {info['model_info']}")
 Complete fact-checking pipeline combining retrieval and generation:
 
 ```python
-from nlp_project.rag import RAGSystem
+from nlp_project.rag import RAGSystem, WikipediaRetriever, ClaudeGenerator
 
 rag = RAGSystem()
 
@@ -340,6 +340,10 @@ nlp_project/
 │       ├── logger.py
 │       └── preprocessing.py
 ├── tests/                     # Test suite
+│   ├── __init__.py
+│   ├── test_keyword_extraction.py 
+│   ├── test_rag.py                 
+│   └── test_sentence_ranking.py
 ├── docs/                      # Documentation
 ├── config/                    # Configuration files
 ├── scripts/                   # Utility scripts
