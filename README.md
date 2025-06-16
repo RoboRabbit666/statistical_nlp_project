@@ -67,7 +67,7 @@ Our approach integrates three core methodological components:
 - **Similarity Metrics**: Cosine similarity between claim and sentence embeddings
 - **Output**: Top 5 most relevant sentences per Wikipedia page
 
-## 📊 Experimental Design
+## 📊 Experimental Design & Pipeline 
 
 ### **Dataset & Evaluation Framework**
 - **Primary Dataset**: FEVER (Fact Extraction and VERification) dataset
@@ -87,6 +87,152 @@ Our approach integrates three core methodological components:
 - **Keyword Extraction**: Comparative analysis across NER, LLM, and combined methods
 - **RAG System**: End-to-end claim verification pipeline
 - **Processing Optimization**: GPU acceleration support for sentence transformers
+
+### **📊 Complete Workflow Overview**
+
+Our experimental pipeline follows a systematic approach to evaluate and compare different NLP techniques for claim verification and keyword extraction:
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Data Input    │ -> │  Preprocessing  │ -> │ Keyword Extract │
+│  (Claims/Text)  │    │   & Cleaning    │    │  (NER + LLM)    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         v                       v                       v
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Knowledge Base  │ <- │ Sentence Ranking│ <- │   Validation    │
+│   Retrieval     │    │  & Similarity   │    │  & Scoring      │
+│  (Wikipedia)    │    │   Computation   │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         v                       v                       v
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ RAG Enhancement │ -> │ Claude Analysis │ -> │ Final Verdict   │
+│   & Context     │    │  & Reasoning    │    │ & Evaluation    │
+│   Integration   │    │   Generation    │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### **🎯 Step-by-Step Experimental Process**
+
+#### **Phase 1: Data Preparation & Setup**
+```bash
+# Step 1: Environment Setup
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY="your-api-key"
+
+# Step 2: Initialize Core Components
+python -c "from nlp_project.utils import Config; config = Config.from_yaml('config/default.yaml')"
+```
+
+#### **Phase 2: Keyword Extraction Pipeline**
+```python
+# Step 3: Multi-Method Keyword Extraction
+extractor = KeywordExtractor(config)
+
+# Step 3a: NER-based extraction
+ner_keywords = extractor._extract_with_ner(text)
+
+# Step 3b: LLM-based extraction  
+llm_keywords = extractor._extract_with_llm(text)
+
+# Step 3c: Ensemble combination (achieving 87.7% accuracy)
+final_keywords = extractor.extract_keywords(text)
+```
+
+#### **Phase 3: Knowledge Retrieval & Ranking**
+```python
+# Step 4: Wikipedia Knowledge Base Retrieval
+retriever = WikipediaRetriever()
+relevant_articles = retriever.search_wikipedia(keywords)
+
+# Step 5: Sentence-Level Ranking & Similarity
+ranker = SentenceRanker(config)
+ranked_sentences = ranker.rank_sentences(claim, candidate_sentences)
+```
+
+#### **Phase 4: RAG-Enhanced Fact Checking**
+```python
+# Step 6: RAG System Integration
+rag_system = RAGSystem(config)
+
+# Step 6a: Baseline LLM verification (58% accuracy)
+baseline_result = llm_only_verification(claim)
+
+# Step 6b: RAG-enhanced verification (63% accuracy - 5% improvement)
+enhanced_result = rag_system.verify_claim(claim)
+```
+
+#### **Phase 5: Evaluation & Analysis**
+```python
+# Step 7: Performance Evaluation
+evaluation_results = {
+    "keyword_extraction_accuracy": 87.7,  # NER + LLM ensemble
+    "baseline_llm_accuracy": 58.0,        # LLM only
+    "rag_enhanced_accuracy": 63.0,        # RAG + LLM
+    "improvement": 5.0                     # RAG enhancement benefit
+}
+
+# Step 8: Generate comprehensive reports
+generate_technical_report(evaluation_results)
+```
+
+### **🔄 Complete Experimental Loop**
+
+```mermaid
+graph TD
+    A[Input Claim] --> B[Keyword Extraction]
+    B --> C[Wikipedia Retrieval]
+    C --> D[Sentence Ranking]
+    D --> E[Context Integration]
+    E --> F[Claude Analysis]
+    F --> G[Verdict Generation]
+    G --> H[Performance Evaluation]
+    H --> I[Results Analysis]
+    
+    B --> B1[NER Method]
+    B --> B2[LLM Method]
+    B1 --> B3[Ensemble 87.7%]
+    B2 --> B3
+    
+    F --> F1[Baseline LLM 58%]
+    F --> F2[RAG Enhanced 63%]
+    F2 --> F3[+5% Improvement]
+```
+
+### **⚡ Quick Start - Run Complete Pipeline**
+
+```bash
+# Run full experimental pipeline
+python scripts/run_experiment.py --config config/default.yaml
+
+# Or run individual components
+python -m nlp_project.keyword_extraction --text "Your claim here"
+python -m nlp_project.rag --claim "Your claim here" --mode verification
+```
+
+### **📈 Key Experimental Findings**
+
+| Component | Method | Accuracy | Improvement |
+|-----------|--------|----------|-------------|
+| **Keyword Extraction** | NER Only | ~75% | Baseline |
+| **Keyword Extraction** | LLM Only | ~80% | +5% |
+| **Keyword Extraction** | **Ensemble** | **87.7%** | **+12.7%** |
+| **Claim Verification** | LLM Only | 58% | Baseline |
+| **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
+
+### **🎯 Reproducibility Guide**
+
+```bash
+# Reproduce keyword extraction results
+python experiments/keyword_extraction_benchmark.py
+
+# Reproduce RAG vs LLM comparison
+python experiments/rag_comparison_study.py
+
+# Generate all performance metrics
+python experiments/full_evaluation.py --output results/
+```
 
 
 ## 🛠️ Installation & Setup
