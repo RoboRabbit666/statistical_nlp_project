@@ -45,7 +45,7 @@ This project presents a comprehensive **RAG-enhanced NLP system** for automated 
 
 ## 🔬 Methodology
 
-Our approach integrates three core methodological components based on the FEVER dataset research:
+Our approach integrates three core methodological components based on the FEVER (Fact Extraction and VERification) dataset research:
 
 ### **1. Retrieval-Augmented Generation (RAG)**
 - **Knowledge Base**: Wikipedia article corpus for comprehensive domain coverage
