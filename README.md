@@ -37,10 +37,10 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 This project presents a comprehensive **RAG-enhanced NLP system** for automated claim verification and fact-checking. Our research combines state-of-the-art retrieval-augmented generation with advanced keyword extraction and sentence ranking techniques to create a robust, production-ready fact-checking pipeline.
 
 **Key Research Contributions:**
-1. **Novel Ensemble Methods**: Multi-method approach combining NER and LLM techniques (87.7% accuracy)
-2. **Comprehensive Evaluation**: Statistical significance testing and cross-validation on FEVER dataset
-3. **Production Architecture**: Scalable system design with professional documentation
-4. **Academic Rigor**: Peer-reviewed methodology with reproducible results
+1. **RAG vs LLM Comparison**: Demonstrated 5% accuracy improvement (58% → 63%) using RAG enhancement
+2. **Ensemble Keyword Extraction**: Combined NER and LLM approach achieving 87.7% accuracy
+3. **Fine-tuned Sentence Ranking**: Custom all-MiniLM-L6-v2 model with triplet loss optimization
+4. **Modular Pipeline**: Three-step architecture (keyword extraction → sentence ranking → claim verification)
 
 > 💡 **For Detailed Analysis**: See the [complete technical report](docs/project_report/technical_report.pdf) for in-depth methodology, experimental results, and comprehensive evaluation.
 
@@ -51,7 +51,7 @@ Our approach integrates three core methodological components:
 ### **1. Retrieval-Augmented Generation (RAG)**
 - **Knowledge Base**: Wikipedia article corpus for comprehensive domain coverage
 - **Retrieval Strategy**: Keyword-based search with semantic similarity ranking
-- **Generation Model**: Claude-3 for reasoning and verdict generation
+- **Generation Model**: Claude-3-Haiku for reasoning and verdict generation
 - **Pipeline Integration**: End-to-end automated fact-checking workflow
 
 ### **2. Multi-Modal Keyword Extraction**
@@ -61,29 +61,32 @@ Our approach integrates three core methodological components:
 - **Contextual Validation**: Intelligent scoring and filtering mechanisms
 
 ### **3. Advanced Sentence Ranking**
-- **Transformer Models**: Fine-tuned sentence transformers for semantic similarity
-- **Similarity Metrics**: Cosine similarity with optimized batch processing
-- **Performance Optimization**: GPU acceleration and efficient memory management
-- **Relevance Scoring**: Multi-criteria ranking for evidence selection
+- **Base Model**: all-MiniLM-L6-v2 (compressed BERT variant)
+- **Fine-tuning**: Triplet loss function with margin=1.0
+- **Training Data**: FEVER dataset evidence sentences as positive instances
+- **Similarity Metrics**: Cosine similarity between claim and sentence embeddings
+- **Output**: Top 5 most relevant sentences per Wikipedia page
 
 ## 📊 Experimental Design
 
 ### **Dataset & Evaluation Framework**
 - **Primary Dataset**: FEVER (Fact Extraction and VERification) dataset
 - **Evaluation Metrics**: Accuracy, Precision, Recall, F1-Score
-- **Cross-Validation**: 5-fold cross-validation for robust performance assessment
-- **Statistical Testing**: Significance testing for method comparison
+- **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO labels
+- **Evaluation Scripts**: Automated testing framework in `scripts/run_evaluation.py`
 
 ### **Experimental Setup**
-- **Baseline Comparisons**: Individual method performance vs. ensemble approach
-- **Ablation Studies**: Component-wise contribution analysis
-- **Parameter Tuning**: Grid search optimization for hyperparameters
-- **Reproducibility**: Fixed random seeds and documented experimental protocols
+- **Test Dataset**: 282 samples from FEVER test split
+- **Keyword Extraction**: 1000 samples for accuracy evaluation
+- **Sentence Model**: `all-MiniLM-L6-v2` fine-tuned with triplet loss
+- **LLM Model**: `claude-3-haiku-20240307` (rate limited to 50k tokens/min)
+- **Retrieved Sentences**: 5 per Wikipedia page
+- **Evaluation Method**: Two-step prompting with Chain-of-Thought reasoning
 
 ### **Performance Benchmarks**
 - **Keyword Extraction**: Comparative analysis across NER, LLM, and combined methods
-- **RAG System**: End-to-end claim verification accuracy
-- **Computational Efficiency**: Processing time and resource utilization metrics
+- **RAG System**: End-to-end claim verification pipeline
+- **Processing Optimization**: GPU acceleration support for sentence transformers
 
 
 ## 🛠️ Installation & Setup
@@ -253,6 +256,9 @@ sentence_model: "sentence-transformers/all-MiniLM-L6-v2"
 anthropic_model: "claude-3-haiku-20240307"
 batch_size: 128
 num_retrieved_sentences: 5
+max_sequence_length: 512
+temperature: 0.0
+max_tokens: 4096
 device: "auto"
 ```
 
@@ -278,17 +284,20 @@ config = Config(
 ## 📈 Results & Performance
 
 ### **Keyword Extraction Performance**
-| Method | Accuracy | Precision | Recall | F1-Score |
-|--------|----------|-----------|--------|----------|
-| NER Only | 77.6% | 0.823 | 0.741 | 0.780 |
-| LLM Only | 71.2% | 0.756 | 0.692 | 0.722 |
-| **Combined Approach** | **87.7%** | **0.891** | **0.864** | **0.877** |
+*Evaluated on 1000 FEVER test samples*
+
+| Method | Accuracy | Details |
+|--------|----------|---------|
+| NER Only | 77.6% | spaCy named entity recognition |
+| LLM Only | 71.2% | Claude-3-Haiku keyword extraction |
+| **Combined Approach** | **87.7%** | **Aggregated NER + LLM results** |
 
 ### **RAG System Performance**
-- **Dataset**: FEVER (Fact Extraction and VERification)
+- **Dataset**: FEVER (Fact Extraction and VERification) - 282 test samples
+- **LLM-Only Accuracy**: 58%
+- **RAG-Enhanced LLM Accuracy**: 63%
+- **Performance Improvement**: 5% increase with RAG implementation
 - **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO
-- **Overall Accuracy**: Comprehensive fact-checking pipeline evaluation
-- **Processing Speed**: Optimized for both accuracy and efficiency
 
 ### **Computational Performance**
 - **GPU Acceleration**: CUDA support for sentence transformers
