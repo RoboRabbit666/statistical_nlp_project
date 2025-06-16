@@ -1,16 +1,16 @@
 # Advanced Natural Language Processing Project
 
-A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**, **keyword extraction**, and **advanced sentence ranking** for fact-checking and claim verification.
+A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**, **keyword extraction**, and **sentence ranking** for fact-checking and claim verification.
 
 ![NLP Portfolio Banner](images/Gemini_Generated_Image.png)
 
 ## 🌟 Features
 
-### 🔍 **Advanced RAG System**
-- Wikipedia-based knowledge retrieval
-- Fine-tuned sentence similarity ranking
+### 🔍 **RAG-Enhanced Fact Checking**
+- Wikipedia-based knowledge retrieval system
+- Sentence similarity ranking using pre-trained transformers
 - Claude-powered reasoning and verdict generation
-- Comprehensive fact-checking pipeline
+- Comprehensive claim verification pipeline
 
 ### 🎯 **Multi-Method Keyword Extraction**
 - **Named Entity Recognition (NER)** using spaCy
@@ -18,8 +18,8 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 - **Ensemble approach** combining both methods (87.7% accuracy)
 - Intelligent keyword validation and scoring
 
-### 📊 **Sophisticated Sentence Ranking**
-- Fine-tuned sentence transformers
+### 📊 **Advanced Sentence Ranking**
+- Pre-trained sentence transformers (all-MiniLM-L6-v2)
 - Cosine similarity computation
 - Batch processing optimization
 - GPU acceleration support
@@ -31,22 +31,21 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 - Configuration management
 - Type hints and documentation
 
-
 ## 🎯 Research Overview
 
-This project presents a comprehensive **RAG-enhanced NLP system** for automated claim verification and fact-checking. Our research combines state-of-the-art retrieval-augmented generation with advanced keyword extraction and sentence ranking techniques to create a robust, production-ready fact-checking pipeline.
+This project presents a comprehensive **RAG-enhanced NLP system** for automated claim verification and fact-checking. Our research combines retrieval-augmented generation with advanced keyword extraction and sentence ranking techniques to create a robust fact-checking pipeline.
 
-**Key Research Contributions:**
-1. **RAG vs LLM Comparison**: Demonstrated 5% accuracy improvement (58% → 63%) using RAG enhancement
+**Key Research Findings:**
+1. **RAG Enhancement**: Demonstrated 5% accuracy improvement (58% → 63%) using RAG over LLM-only approach
 2. **Ensemble Keyword Extraction**: Combined NER and LLM approach achieving 87.7% accuracy
-3. **Fine-tuned Sentence Ranking**: Custom all-MiniLM-L6-v2 model with triplet loss optimization
-4. **Modular Pipeline**: Three-step architecture (keyword extraction → sentence ranking → claim verification)
+3. **Sentence Ranking**: Leveraged pre-trained all-MiniLM-L6-v2 model with cosine similarity
+4. **Modular Pipeline**: Four-step architecture for comprehensive claim verification
 
 > 💡 **For Detailed Analysis**: See the [complete technical report](docs/project_report/technical_report.pdf) for in-depth methodology, experimental results, and comprehensive evaluation.
 
-## 🏗️ Methodology
+## 🔬 Methodology
 
-Our approach integrates three core methodological components:
+Our approach integrates three core methodological components based on the FEVER dataset research:
 
 ### **1. Retrieval-Augmented Generation (RAG)**
 - **Knowledge Base**: Wikipedia article corpus for comprehensive domain coverage
@@ -60,160 +59,17 @@ Our approach integrates three core methodological components:
 - **Ensemble Approach**: Weighted combination of both methods for optimal performance
 - **Contextual Validation**: Intelligent scoring and filtering mechanisms
 
-### **3. Advanced Sentence Ranking**
+### **3. Sentence Ranking and Similarity**
 - **Base Model**: all-MiniLM-L6-v2 (compressed BERT variant)
-- **Fine-tuning**: Triplet loss function with margin=1.0
-- **Training Data**: FEVER dataset evidence sentences as positive instances
 - **Similarity Metrics**: Cosine similarity between claim and sentence embeddings
-- **Output**: Top 5 most relevant sentences per Wikipedia page
+- **Ranking Strategy**: Top-k most relevant sentences per Wikipedia page
+- **Optimization**: Batch processing with GPU acceleration support
 
-## 📊 Experimental Design
+## 📊 Experimental Results
 
-### **Dataset & Evaluation Framework**
-- **Primary Dataset**: FEVER (Fact Extraction and VERification) dataset
-- **Evaluation Metrics**: Accuracy, Precision, Recall, F1-Score
-- **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO labels
-- **Evaluation Scripts**: Automated testing framework in `scripts/run_evaluation.py`
-
-### **Experimental Setup**
-- **Test Dataset**: 282 samples from FEVER test split
-- **Keyword Extraction**: 1000 samples for accuracy evaluation
-- **Sentence Model**: `all-MiniLM-L6-v2` fine-tuned with triplet loss
-- **LLM Model**: `claude-3-haiku-20240307` (rate limited to 50k tokens/min)
-- **Retrieved Sentences**: 5 per Wikipedia page
-- **Evaluation Method**: Two-step prompting with Chain-of-Thought reasoning
-
-## 🪈 Project Pipeline 
 ### **Performance Benchmarks**
-- **Keyword Extraction**: Comparative analysis across NER, LLM, and combined methods
-- **RAG System**: End-to-end claim verification pipeline
-- **Processing Optimization**: GPU acceleration support for sentence transformers
+Based on FEVER dataset evaluation (282 test samples):
 
-### **⏳ Complete Workflow Overview** ⏳
-
-This experimental pipeline follows a systematic approach to evaluate and compare different NLP techniques for claim verification and keyword extraction:
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Data Input    │ -> │  Preprocessing  │ -> │ Keyword Extract │
-│  (Claims/Text)  │    │   & Cleaning    │    │  (NER + LLM)    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         v                       v                       v
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ Knowledge Base  │ <- │ Sentence Ranking│ <- │   Validation    │
-│   Retrieval     │    │  & Similarity   │    │  & Scoring      │
-│  (Wikipedia)    │    │   Computation   │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         v                       v                       v
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ RAG Enhancement │ -> │ Claude Analysis │ -> │ Final Verdict   │
-│   & Context     │    │  & Reasoning    │    │ & Evaluation    │
-│   Integration   │    │   Generation    │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
-### **🎯 Step-by-Step Experimental Process**
-
-#### **Phase 1: Data Preparation & Setup**
-```bash
-# Step 1: Environment Setup
-pip install -r requirements.txt
-export ANTHROPIC_API_KEY="your-api-key"
-
-# Step 2: Initialize Core Components
-python -c "from nlp_project.utils import Config; config = Config.from_yaml('config/default.yaml')"
-```
-
-#### **Phase 2: Keyword Extraction Pipeline**
-```python
-# Step 3: Multi-Method Keyword Extraction
-extractor = KeywordExtractor(config)
-
-# Step 3a: NER-based extraction
-ner_keywords = extractor._extract_with_ner(text)
-
-# Step 3b: LLM-based extraction  
-llm_keywords = extractor._extract_with_llm(text)
-
-# Step 3c: Ensemble combination (achieving 87.7% accuracy)
-final_keywords = extractor.extract_keywords(text)
-```
-
-#### **Phase 3: Knowledge Retrieval & Ranking**
-```python
-# Step 4: Wikipedia Knowledge Base Retrieval
-retriever = WikipediaRetriever()
-relevant_articles = retriever.search_wikipedia(keywords)
-
-# Step 5: Sentence-Level Ranking & Similarity
-ranker = SentenceRanker(config)
-ranked_sentences = ranker.rank_sentences(claim, candidate_sentences)
-```
-
-#### **Phase 4: RAG-Enhanced Fact Checking**
-```python
-# Step 6: RAG System Integration
-rag_system = RAGSystem(config)
-
-# Step 6a: Baseline LLM verification (58% accuracy)
-baseline_result = llm_only_verification(claim)
-
-# Step 6b: RAG-enhanced verification (63% accuracy - 5% improvement)
-enhanced_result = rag_system.verify_claim(claim)
-```
-
-#### **Phase 5: Evaluation & Analysis**
-```python
-# Step 7: Performance Evaluation
-evaluation_results = {
-    "keyword_extraction_accuracy": 87.7,  # NER + LLM ensemble
-    "baseline_llm_accuracy": 58.0,        # LLM only
-    "rag_enhanced_accuracy": 63.0,        # RAG + LLM
-    "improvement": 5.0                     # RAG enhancement benefit
-}
-
-# Step 8: Generate comprehensive reports
-generate_technical_report(evaluation_results)
-```
-
-### **🔄 Complete Experimental Loop**
-
-```mermaid
-graph TD
-    A[Input Claim] --> B[Keyword Extraction]
-    B --> C[Wikipedia Retrieval]
-    C --> D[Sentence Ranking]
-    D --> E[Context Integration]
-    E --> F[Claude Analysis]
-    F --> G[Verdict Generation]
-    G --> H[Performance Evaluation]
-    H --> I[Results Analysis]
-    
-    B --> B1[NER Method]
-    B --> B2[LLM Method]
-    B1 --> B3[Ensemble 87.7%]
-    B2 --> B3
-    
-    F --> F1[Baseline LLM 58%]
-    F --> F2[RAG Enhanced 63%]
-    F2 --> F3[+5% Improvement]
-```
-
-### **⚡ Quick Start - Run Complete Pipeline**
-
-```bash
-# Run full experimental pipeline
-python scripts/run_experiment.py --config config/default.yaml
-
-# Or run individual components
-python -m nlp_project.keyword_extraction --text "Your claim here"
-python -m nlp_project.rag --claim "Your claim here" --mode verification
-```
-
-### **📈 Results & Performance**
-### **TLDR:**
 | Component | Method | Accuracy | Improvement |
 |-----------|--------|----------|-------------|
 | **Keyword Extraction** | LLM Only | 71.2% | Baseline |
@@ -222,9 +78,8 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 | **Claim Verification** | LLM Only | 58% | Baseline |
 | **Claim Verification** | **RAG Enhanced** | **63%** | **+5%** |
 
-<br>
+### **Detailed Results**
 
-### **Details:**
 **Keyword Extraction Performance**
 *(Evaluated on 1000 FEVER test samples)*
 
@@ -241,25 +96,85 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 - **Performance Improvement**: 5% increase with RAG implementation
 - **Classification Support**: SUPPORTS/REFUTES/NOT ENOUGH INFO
 
-**Computational Performance**
-- **GPU Acceleration**: CUDA support for sentence transformers
-- **Batch Processing**: Optimized for large-scale claim verification
-- **Memory Efficiency**: Intelligent caching and resource management
-- **Scalability**: Production-ready architecture for high-throughput scenarios
+## 🪈 System Architecture & Pipeline
 
-### **🎯 Reproducibility Guide**
+### **Complete Workflow Overview**
 
-```bash
-# Reproduce keyword extraction results
-python experiments/keyword_extraction_benchmark.py
+The system follows a **4-step pipeline** for claim verification:
 
-# Reproduce RAG vs LLM comparison
-python experiments/rag_comparison_study.py
-
-# Generate all performance metrics
-python experiments/full_evaluation.py --output results/
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Input Claim   │ -> │ Keyword Extract │ -> │ Wikipedia Search│ -> │ Sentence Ranking│
+│                 │    │  (NER + LLM)    │    │   & Retrieval   │    │ & Similarity    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
+                                 │                       │                       │
+                                 v                       v                       v
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Final Verdict   │ <- │ Claude Analysis │ <- │ Context Assembly│ <- │ Evidence Filter │
+│ & Confidence    │    │  & Reasoning    │    │ & Integration   │    │ (Top-k Sentences)│
+└─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
+### **Implementation Details**
+
+#### **Step 1: Keyword Extraction**
+```python
+# Multi-method keyword extraction (KeywordExtractor)
+keywords = extractor.extract_keywords(claim, method="combined")
+# Combines NER (spaCy) + LLM (Claude) approaches
+```
+
+#### **Step 2: Wikipedia Knowledge Retrieval**
+```python
+# Content retrieval for each keyword (WikipediaRetriever)
+for keyword in keywords:
+    content = retriever.search_and_get_content(keyword)
+    all_content.extend(content)
+```
+
+#### **Step 3: Sentence Ranking & Evidence Selection**
+```python
+# Sentence-level ranking using pre-trained transformers (SentenceRanker)
+ranked_sentences = ranker.rank_sentences_by_relevance(claim, sentences)
+retrieved_sentences = ranked_sentences[:num_sentences]
+```
+
+#### **Step 4: RAG-Enhanced Claim Verification**
+```python
+# Two-step reasoning with Claude (ClaudeGenerator)
+reasoning = generator.generate_reasoning(claim, evidence_sentences)
+verdict = generator.generate_verdict(claim, evidence_sentences, reasoning)
+```
+
+### **Core Components**
+
+#### **1. RAG System** (`nlp_project.rag.RAGSystem`)
+- **Main Pipeline**: Orchestrates the complete fact-checking workflow
+- **Batch Processing**: Supports multiple claims verification
+- **Error Handling**: Comprehensive exception management
+- **Confidence Scoring**: Heuristic-based confidence calculation
+
+#### **2. Keyword Extractor** (`nlp_project.keyword_extraction.KeywordExtractor`)
+- **NER Integration**: spaCy-based named entity recognition
+- **LLM Integration**: Claude-based semantic keyword extraction
+- **Ensemble Logic**: Combines multiple extraction methods
+- **Validation**: Keyword relevance scoring and filtering
+
+#### **3. Sentence Ranker** (`nlp_project.sentence_ranking.SentenceRanker`)
+- **Model**: Pre-trained all-MiniLM-L6-v2 transformer
+- **Similarity**: Cosine similarity between embeddings
+- **Optimization**: Batch processing with GPU support
+- **Flexibility**: Support for custom fine-tuned models
+
+#### **4. Wikipedia Retriever** (`nlp_project.rag.WikipediaRetriever`)
+- **Search**: Keyword-based Wikipedia content retrieval
+- **Processing**: Sentence extraction and content filtering
+- **Caching**: Efficient content management
+
+#### **5. Claude Generator** (`nlp_project.rag.ClaudeGenerator`)
+- **Reasoning**: Chain-of-thought reasoning generation
+- **Verdict**: Final claim classification (SUPPORTS/REFUTES/NOT ENOUGH INFO)
+- **Integration**: Seamless RAG pipeline integration
 
 ## 🛠️ Installation & Setup
 
@@ -338,13 +253,15 @@ results = rag_system.batch_verify_claims(
 )
 ```
 
-#### **Custom Model Integration**
+#### **Component-Level Usage**
 ```python
-# Use custom fine-tuned model
-ranker = SentenceRanker(
-    model_name="custom-model",
-    fine_tuned_model_path="path/to/weights.ckpt"
-)
+# Keyword extraction only
+extractor = KeywordExtractor()
+keywords = extractor.extract_keywords("Your text here", method="combined")
+
+# Sentence ranking only
+ranker = SentenceRanker()
+ranked_sentences = ranker.rank_sentences_by_relevance(query, candidates)
 ```
 
 #### **Performance Monitoring**
@@ -355,72 +272,36 @@ print(f"Device: {info['model_info']['device']}")
 print(f"Models: {info['model_info']}")
 ```
 
-## 📚 Core Components
+## 🧪 Testing & Evaluation
 
-### 1. RAG System (`nlp_project.rag`)
+### **Running Tests**
 
-Complete fact-checking pipeline combining retrieval and generation:
+```bash
+# Run all tests
+pytest
 
-```python
-from nlp_project.rag import RAGSystem, WikipediaRetriever, ClaudeGenerator
+# Run with coverage
+pytest --cov=nlp_project --cov-report=html
 
-rag = RAGSystem()
-
-# Single claim verification
-result = rag.verify_claim("Climate change is caused by human activities.")
-
-# Batch processing
-claims = ["Claim 1", "Claim 2", "Claim 3"]
-results = rag.batch_verify_claims(claims)
-
-# Performance evaluation
-test_data = [{"claim": "...", "label": "SUPPORTS"}, ...]
-metrics = rag.evaluate_performance(test_data)
+# Run specific test modules
+pytest tests/test_rag.py
+pytest tests/test_keyword_extraction.py
+pytest tests/test_sentence_ranking.py
 ```
 
-### 2. Keyword Extraction (`nlp_project.keyword_extraction`)
+### **Evaluation Script**
 
-Keyword extraction with ensemble methods:
+```bash
+# Run comprehensive evaluation
+python scripts/run_evaluation.py --test-data path/to/test_data.json --output-dir results/
 
-```python
-from nlp_project.keyword_extraction import KeywordExtractor
-
-extractor = KeywordExtractor()
-
-# Extract keywords using combined approach
-keywords = extractor.extract_keywords(
-    "Machine learning models require large datasets.",
-    method="combined"
-)
-
-# Get keywords with confidence scores
-keyword_data = extractor.extract_keywords_with_scores(text)
-```
-
-### 3. Sentence Ranking (`nlp_project.sentence_ranking`)
-
-Advanced similarity computation and ranking:
-
-```python
-from nlp_project.sentence_ranking import SentenceRanker
-
-ranker = SentenceRanker()
-
-# Rank sentences by relevance to query
-query = "What is artificial intelligence?"
-candidates = ["AI is...", "Machine learning...", "Deep learning..."]
-
-ranked_sentences, similarities = ranker.rank_sentences_by_relevance(
-    query, candidates, return_similarities=True
-)
-
-# Get top-k most similar
-top_similar = ranker.get_top_k_similar(query, candidates, k=3)
+# Evaluate specific components
+python scripts/run_evaluation.py --test-data path/to/test_data.json --components rag keyword
 ```
 
 ## 🔧 Configuration
 
-### Configuration Files
+### **Configuration Files**
 
 ```yaml
 # config/default.yaml
@@ -434,7 +315,7 @@ max_tokens: 4096
 device: "auto"
 ```
 
-### Programmatic Configuration
+### **Programmatic Configuration**
 
 ```python
 from nlp_project.utils import Config
@@ -453,21 +334,6 @@ config = Config(
 )
 ```
 
-## 🧪 Testing
-
-```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=nlp_project --cov-report=html
-
-# Run specific test modules
-pytest tests/test_rag.py
-pytest tests/test_keyword_extraction.py
-pytest tests/test_sentence_ranking.py
-```
-
 ## 📁 Project Structure
 
 ```
@@ -482,22 +348,35 @@ nlp_project/
 │   │   ├── ner_extractor.py
 │   │   └── llm_extractor.py
 │   ├── sentence_ranking/      # Sentence similarity
-│   │   └── sentence_ranker.py
+│   │   ├── sentence_ranker.py
+│   │   └── similarity_metrics.py
 │   └── utils/                 # Utilities
 │       ├── config.py
 │       ├── logger.py
 │       └── preprocessing.py
 ├── tests/                     # Test suite
-│   ├── __init__.py
 │   ├── test_keyword_extraction.py 
 │   ├── test_rag.py                 
 │   └── test_sentence_ranking.py
 ├── docs/                      # Documentation
+│   └── project_report/
+│       └── technical_report.pdf
 ├── config/                    # Configuration files
+│   └── default.yaml
 ├── scripts/                   # Utility scripts
-└── notebooks/                 # Jupyter notebooks
+│   └── run_evaluation.py
+├── notebooks/                 # Jupyter notebooks
+│   └── demo.ipynb
+└── README.md
 ```
 
+## 📊 Demo & Examples
+
+Check out the interactive demo in `notebooks/demo.ipynb` which showcases:
+- Multi-method keyword extraction
+- Sentence ranking and similarity
+- Complete RAG-based fact checking
+- System configuration and monitoring
 
 ## 🤝 Contributing
 
@@ -517,9 +396,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Uses state-of-the-art transformer models
 - Powered by Anthropic's Claude API
 - Utilizes Wikipedia's knowledge base
+- Based on FEVER dataset research
 
-## 🔗 Link
-
+## 🔗 Links
 
 Project Link: [https://github.com/RoboRabbit666/statistical_nlp_project](https://github.com/RoboRabbit666/statistical_nlp_project)
 
