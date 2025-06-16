@@ -224,6 +224,7 @@ python -m nlp_project.rag --claim "Your claim here" --mode verification
 
 <br>
 <br>
+---
 
 **Details:**
 ### **Keyword Extraction Performance**
