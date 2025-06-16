@@ -12,7 +12,7 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 - Claude-powered reasoning and verdict generation
 - Comprehensive fact-checking pipeline
 
-### 🎯 **Multi-component Keyword Extraction**
+### 🎯 **Multi-Method Keyword Extraction**
 - **Named Entity Recognition (NER)** using spaCy
 - **Large Language Model (LLM)** extraction via Claude
 - **Ensemble approach** combining both methods (87.7% accuracy)
