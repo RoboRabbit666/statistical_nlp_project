@@ -4,34 +4,34 @@ A comprehensive NLP pipeline featuring **Retrieval-Augmented Generation (RAG)**,
 
 ![NLP Portfolio Banner](images/Image.png)
 
-## 🌟 Features
+## Features
 
-### 🔍 **RAG-Enhanced Fact Checking**
+### **RAG-Enhanced Fact Checking**
 - Wikipedia-based knowledge retrieval system
 - Sentence similarity ranking using pre-trained transformers
 - Claude-powered reasoning and verdict generation
 - Comprehensive claim verification pipeline
 
-### 🎯 **Multi-Method Keyword Extraction**
+### **Multi-Method Keyword Extraction**
 - **Named Entity Recognition (NER)** using spaCy
 - **Large Language Model (LLM)** extraction via Claude
 - **Ensemble approach** combining both methods (87.7% accuracy)
 - Intelligent keyword validation and scoring
 
-### 📊 **Advanced Sentence Ranking**
+### **Advanced Sentence Ranking**
 - Pre-trained sentence transformers (all-MiniLM-L6-v2)
 - Cosine similarity computation
 - Batch processing optimization
 - GPU acceleration support
 
-### 🏗️ **Production-Ready Architecture**
+### **Production-Ready Architecture**
 - Modular, extensible design
 - Comprehensive error handling
 - Professional logging system
 - Configuration management
 - Type hints and documentation
 
-## 🎯 Research Overview
+## Research Overview
 
 This project presents a comprehensive **RAG-enhanced NLP system** for automated claim verification and fact-checking. Our research combines retrieval-augmented generation with advanced keyword extraction and sentence ranking techniques to create a robust fact-checking pipeline.
 
@@ -41,9 +41,9 @@ This project presents a comprehensive **RAG-enhanced NLP system** for automated 
 3. **Sentence Ranking**: Leveraged pre-trained all-MiniLM-L6-v2 model with cosine similarity
 4. **Modular Pipeline**: Four-step architecture for comprehensive claim verification
 
-> 💡 **For Detailed Analysis**: See the [complete technical report](docs/project_report/technical_report.pdf) for in-depth methodology, experimental results, and comprehensive evaluation.
+**For Detailed Analysis**: See the [complete technical report](docs/project_report/technical_report.pdf) for in-depth methodology, experimental results, and comprehensive evaluation.
 
-## 🔬 Methodology
+## Methodology
 
 Our approach integrates three core methodological components based on the FEVER (Fact Extraction and VERification) dataset research:
 
@@ -65,7 +65,7 @@ Our approach integrates three core methodological components based on the FEVER 
 - **Ranking Strategy**: Top-k most relevant sentences per Wikipedia page
 - **Optimization**: Batch processing with GPU acceleration support
 
-## 📊 Experimental Results
+## Experimental Results
 
 ### **Performance Benchmarks**
 Based on research findings from the technical report:
@@ -100,7 +100,7 @@ Based on research findings from the technical report:
 - FEVER dataset from 2018 may have outdated Wikipedia ground truth
 - Rate limiting affected sample size for comprehensive evaluation
 
-## 🪈 System Architecture & Pipeline
+## System Architecture & Pipeline
 
 ### **Complete Workflow Overview**
 
@@ -203,7 +203,7 @@ result = {
 - **Verdict**: Final claim classification (SUPPORTS/REFUTES/NOT ENOUGH INFO)
 - **Integration**: Seamless RAG pipeline integration
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 ### **Prerequisites**
 - Python 3.8 or higher
@@ -244,7 +244,7 @@ export DEVICE="cuda"  # or "cpu"
 python -c "from nlp_project import RAGSystem; print('Installation successful!')"
 ```
 
-## 🚀 Usage
+## Usage
 
 ### **Basic Usage**
 
@@ -299,7 +299,7 @@ print(f"Device: {info['model_info']['device']}")
 print(f"Models: {info['model_info']}")
 ```
 
-## 🧪 Testing & Evaluation
+## Testing & Evaluation
 
 ### **Running Tests**
 
@@ -326,7 +326,7 @@ python scripts/run_evaluation.py --test-data path/to/test_data.json --output-dir
 python scripts/run_evaluation.py --test-data path/to/test_data.json --components rag keyword
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### **Configuration Files**
 
@@ -361,7 +361,7 @@ config = Config(
 )
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 nlp_project/
@@ -397,7 +397,7 @@ nlp_project/
 └── README.md
 ```
 
-## 📊 Demo & Examples
+## Demo & Examples
 
 Check out the interactive demo in `notebooks/demo.ipynb` which showcases:
 - Multi-method keyword extraction
@@ -405,7 +405,7 @@ Check out the interactive demo in `notebooks/demo.ipynb` which showcases:
 - Complete RAG-based fact checking
 - System configuration and monitoring
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -413,11 +413,11 @@ Check out the interactive demo in `notebooks/demo.ipynb` which showcases:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built for UCL Statistical NLP course
 - Uses state-of-the-art transformer models
@@ -425,10 +425,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Utilizes Wikipedia's knowledge base
 - Based on FEVER dataset research
 
-## 🔗 Links
+## Links
 
 Project Link: [https://github.com/RoboRabbit666/statistical_nlp_project](https://github.com/RoboRabbit666/statistical_nlp_project)
-
----
-
-**🎓 Academic Project** | **🔬 Research-Grade** | **🏭 Production-Ready**
