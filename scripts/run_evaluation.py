@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """
-Evaluation script for the Advanced NLP Project.
-
-This script provides comprehensive evaluation capabilities for the RAG system,
-keyword extraction, and sentence ranking components.
+Evaluation script for the RAG system, the keyword extractor and the sentence ranker.
 """
 
 import argparse
@@ -195,7 +192,7 @@ def evaluate_sentence_ranking(
 
 def main():
     """Main evaluation function."""
-    parser = argparse.ArgumentParser(description="Evaluate Advanced NLP Project components")
+    parser = argparse.ArgumentParser(description="Evaluate the RAG system, keyword extractor and sentence ranker")
     
     parser.add_argument(
         "--config",

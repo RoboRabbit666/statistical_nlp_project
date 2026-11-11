@@ -1,1 +1,1 @@
-"""Test suite for the Advanced NLP Project."""
+"""Tests for the nlp_project package."""

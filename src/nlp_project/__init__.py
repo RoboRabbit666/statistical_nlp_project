@@ -1,14 +1,14 @@
 """
-Advanced Natural Language Processing Pipeline
+Claim verification on FEVER with retrieval-augmented generation (RAG).
 
-A comprehensive NLP package featuring:
-- RAG (Retrieval-Augmented Generation) systems
-- Keyword extraction with multiple approaches
-- Advanced sentence ranking and similarity
+The package has three parts:
+- keyword extraction with spaCy NER and Claude
+- sentence ranking with all-MiniLM-L6-v2
+- the RAG pipeline that ties them together
 """
 
 __version__ = "1.0.0"
-__author__ = "Your Name"
+__author__ = "RoboRabbit666"
 
 from .rag import RAGSystem
 from .keyword_extraction import KeywordExtractor

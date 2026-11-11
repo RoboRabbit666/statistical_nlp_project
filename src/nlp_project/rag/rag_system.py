@@ -1,8 +1,5 @@
 """
-Advanced Retrieval-Augmented Generation (RAG) System.
-
-This module implements a comprehensive RAG system for fact-checking and
-claim verification using Wikipedia knowledge retrieval and Claude generation.
+RAG pipeline that checks a claim against Wikipedia evidence with Claude.
 """
 
 from typing import List, Dict, Optional, Tuple, Any
@@ -20,7 +17,7 @@ logger = get_logger(__name__)
 
 class RAGSystem:
     """
-    Comprehensive RAG system for fact-checking and claim verification.
+    RAG pipeline for fact-checking and claim verification.
     
     Combines keyword extraction, Wikipedia retrieval, sentence ranking,
     and LLM generation for robust claim verification.

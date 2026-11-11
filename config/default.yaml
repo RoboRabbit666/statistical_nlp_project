@@ -1,4 +1,4 @@
-# Default configuration for Advanced NLP Project
+# Default settings for nlp_project
 
 # Model configurations
 sentence_model: "sentence-transformers/all-MiniLM-L6-v2"

@@ -1,4 +1,4 @@
-"""Setup script for the Advanced NLP Project."""
+"""Setup script for statistical_nlp_project."""
 
 from setuptools import setup, find_packages
 import os
@@ -9,7 +9,7 @@ def read_readme():
     if os.path.exists(readme_path):
         with open(readme_path, 'r', encoding='utf-8') as f:
             return f.read()
-    return "Advanced Natural Language Processing Pipeline"
+    return "Claim verification on FEVER with retrieval-augmented generation"
 
 # Read requirements
 def read_requirements():
@@ -20,14 +20,13 @@ def read_requirements():
     return []
 
 setup(
-    name="advanced-nlp-project",
+    name="statistical-nlp-project",
     version="1.0.0",
-    author="Your Name",
-    author_email="your.email@example.com",
-    description="Advanced Natural Language Processing Pipeline with RAG, Keyword Extraction, and Sentence Ranking",
+    author="RoboRabbit666",
+    description="Claim verification on FEVER with keyword extraction, sentence ranking and Claude",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/advanced-nlp-project",
+    url="https://github.com/RoboRabbit666/statistical_nlp_project",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     classifiers=[
@@ -72,9 +71,4 @@ setup(
     include_package_data=True,
     zip_safe=False,
     keywords="nlp, rag, keyword-extraction, sentence-ranking, fact-checking, transformers",
-    project_urls={
-        "Bug Reports": "https://github.com/yourusername/advanced-nlp-project/issues",
-        "Source": "https://github.com/yourusername/advanced-nlp-project",
-        "Documentation": "https://advanced-nlp-project.readthedocs.io/",
-    },
 )

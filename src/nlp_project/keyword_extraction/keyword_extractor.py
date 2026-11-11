@@ -1,9 +1,5 @@
 """
-Advanced keyword extraction combining multiple approaches.
-
-This module provides a comprehensive keyword extraction system that combines
-Named Entity Recognition (NER) and Large Language Model (LLM) approaches
-for optimal performance.
+Keyword extraction with spaCy NER and Claude, used separately or combined.
 """
 
 from typing import List, Set, Optional, Dict, Any
